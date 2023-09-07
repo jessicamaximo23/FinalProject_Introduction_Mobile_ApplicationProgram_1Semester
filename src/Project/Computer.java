@@ -1,9 +1,15 @@
 package Project;
 
 public class Computer {
+	// -------------------------------------------------------------------------------------------------------------
 	// Project Final
-	// Jessica Maximo de Souza
-	// Written by: Jessica Maximo de Souza and ID: 2391133
+	// Written by: Jessica Maximo de Souza ID: 2391133
+	// This part was a part A of a project final for the course Introduction to
+	// mobile application programming
+	// Which consists of creating a java program that accesses the following
+	// information from a computer (brand, model, price and serial number), this
+	// program is flexibly.
+	// -------------------------------------------------------------------------------------------------------------
 
 	// Declare variables for each topic
 	private String brand;
@@ -12,14 +18,15 @@ public class Computer {
 	private long serialNumber;
 	private static int serialNumberCounter = 1000;
 	private static int computerCounter = 000;
-	
-	
-	// Create a constructor for brand, model and price
+
+	// Create a computer object
+	// Create a constructor for initialized a brand, model and price
 	public Computer(String br, String m, double pr) {
 		brand = br;
 		model = m;
 		price = pr;
 		serialNumber = serialNumberCounter;
+		// count for numbers of computers created
 		serialNumberCounter++;
 	}
 
@@ -27,14 +34,14 @@ public class Computer {
 		serialNumber = serialNumberCounter;
 		serialNumberCounter++;
 	}
-	
-	//Make getter and setter for Brand, model price and Serial Number
+
+	// Make getter and setter for Brand, model price and Serial Number
 	public String getBrand() {
 		return brand;
 	}
 
 	public void setBrand(String br) {
-		this.brand = br;
+		brand = br;
 	}
 
 	public String getModel() {
@@ -42,7 +49,7 @@ public class Computer {
 	}
 
 	public void setModel(String m) {
-		this.model = m;
+		model = m;
 	}
 
 	public Double getPrice() {
@@ -50,7 +57,7 @@ public class Computer {
 	}
 
 	public void setPrice(Double pr) {
-		this.price = pr;
+		price = pr;
 	}
 
 	public long getSerialNumber() {
@@ -58,15 +65,18 @@ public class Computer {
 	}
 
 	public void setSerialNumber(long sn) {
-		this.serialNumber = sn;
+		serialNumber = sn;
 	}
 
+	// print the information of an object
+	// make get for brand, price, model and Serial number
 	public static void displayComputer(Computer c) {
-		System.out.println(" The info is : ");
-		System.out.println(" The computer brand is : " + c.getBrand());
-		System.out.println(" The computer price is : " + c.getPrice());
-		System.out.println(" The computer model is : " + c.getModel());
-		System.out.println(" The computer serial number is : " + c.getSerialNumber());
+
+		System.out.println("The info is : ");
+		System.out.println("The computer brand is : " + c.getBrand());
+		System.out.println("The computer price is : " + c.getPrice());
+		System.out.println("The computer model is : " + c.getModel());
+		System.out.println("The computer serial number is : " + c.getSerialNumber());
 		System.out.println("-----------------------------");
 	}
 
@@ -76,13 +86,14 @@ public class Computer {
 				+ "]";
 	}
 
-	//
+	// for know how many computers are created
+	// return the number of computers. The numbers are integer (remember)
 	public static int findNumberOfCreatedComputers() {
 		return computerCounter;
-	
-
 	}
 
+	// Compare two objects
+	// The objects are equal if have the same brand, model and price
 	public boolean equal(Computer c) {
 		if (brand == c.getBrand() && model == c.getModel() && price == c.getPrice()) {
 			return true;
@@ -90,11 +101,5 @@ public class Computer {
 		} else {
 			return false;
 		}
-		
-		
-		
 	}
 }
-
-
-
