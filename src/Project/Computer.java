@@ -3,6 +3,7 @@ package Project;
 import java.util.Scanner;
 
 public class Computer {
+	private static final int String = 0;
 	// -------------------------------------------------------------------------------------------------------------
 	// Project Final
 	// Written by: Jessica Maximo de Souza ID: 2391133
@@ -150,6 +151,7 @@ public class Computer {
 			System.out.println("Option 5: Quit");
 			System.out.println("---------------------------------------------------------------------------------");
 			System.out.println("Please enter your choice > ");
+
 			// initialized a variably menu
 			// user choose a option between 1 and 5
 			choiceMenu = kb.nextInt();
@@ -157,8 +159,7 @@ public class Computer {
 			// Each main menu
 			switch (choiceMenu) {
 			case 1:
-
-				System.out.println("You choose 1.Put your password: ");
+				System.out.println(" 1.Put your password: ");
 				// if the correct password is check put how many computers do want to add
 				if (checkPassword(kb)) {
 					System.out.println("How many computers do want to add?");
@@ -189,110 +190,109 @@ public class Computer {
 					System.out.println("Computer serial number is: ");
 					long serialNumber = kb.nextLong();
 
-					System.out.println();
-					computerCounter++;
+					System.out.println("Computer(s) added sucessfully");
 
-					// nao sei como acrescentar esse pc no programa geral
 					// nao mostrar toda vez o main menu aqui
-					Computer inventoryaddNew[] = new Computer[addNewComputers];
+					inventory[i] = new Computer(brand, model, price);
+					// como colocar o serial number
 
 				}
 				break;
 
 			case 2:
+				System.out.println("2. Put your password");
 
-				do {
-					System.out.println("You choose 2. Put your password");
-					// if the correct password is check put how many computers do want to update
+				// if the correct password is check put how many computers do want to update
+				if (checkPassword(kb)) {
+					System.out.println("Which computer number do you want update?");
 
-					if (checkPassword(kb)) {
-						System.out.println("Which computer number do you want update?");
+					// variable for update the computers
+					updateComputersNumber = kb.nextInt();
 
-						// variable for update the computers
-						updateComputersNumber = kb.nextInt();
+					// add a computer we need to find the index, because computer already exist
+					int index = updateComputersNumber - 1;
 
-						// for to add a computer we need to find the index, because computer already
-						// exist
-						int index = updateComputersNumber - 1;
+					// The computer number is the index in the array inventory.
+					if (index < inventory.length && inventory[index] != null) {
+						Computer c = inventory[index];
 
-						// The computer number is the index in the array inventory.
+						System.out.println("Computer #: " + updateComputersNumber);
+						System.out.println("Brand: " + c.getBrand());
+						System.out.println("Model: " + c.getModel());
+						System.out.println("Computer SerialNumber: " + c.getSerialNumber());
+						System.out.println("Price: $ " + c.getPrice());
+						System.out.println();
 
-						if (index > 0 && index >= computerCounter) {
+						int choicemenu2;
 
-							Computer c = inventory[index];
+						// display the UPDATE MENU
+						do {
+							System.out.println("What information would you like to change? Put the number");
+							System.out.println("1.New Brand");
+							System.out.println("2.New Model");
+							System.out.println("3.New SN");
+							System.out.println("4.New Price");
+							System.out.println("5.Quit the Update Menu");
 
-							// ARRUMAR AQUI TA DANDO NULL NO GET
-							// como salvar as in formacoes que digitei?
-							// display the current information of that computer in the following format:
-							System.out.println("Computer:");
-							System.out.println("Brand:" + c.getBrand());
-							System.out.println("Computer model: " + c.getModel());
-							System.out.println("Computer SN: serial number:" + c.getSerialNumber());
-							System.out.println("Computer Price: $" + c.getPrice());
+							// what information would you like to change?
+							choicemenu2 = kb.nextInt();
+
+							switch (choicemenu2) {
+							case 1:
+								System.out.println("1. Enter the new Brand:");
+								String brand = kb.next();
+								c.getBrand();
+								break;
+							case 2:
+								System.out.println("2. Enter the new Model:");
+								String model = kb.next();
+								c.getModel();
+								break;
+							case 3:
+								System.out.println("3.Enter the new SN");
+								long serialNumber = kb.nextLong();
+								c.getSerialNumber();
+								break;
+							case 4:
+								System.out.println("4. Enter the new Price:");
+								double price = kb.nextDouble();
+								c.getPrice();
+
+								break;
+							case 5:
+								System.out.println("5.Quit the Main Menu");
+								break;
+
+							}
+							System.out.println("Computer(s) changed sucessfully");
 						}
+
+						while (choicemenu2 != 5);
+						// ARRUMAR AQUI TA DANDO NULL NO GET
 					}
 				}
-
-				// while the update computers are greater than max computers and less than
-				// zero..continue
-				while (updateComputersNumber > maxComputers && updateComputersNumber < 0);
-
-				// what information would you like to change?
-				int choicemenu2 = kb.nextInt();
-
-				// Then ask the user which attribute they wish to change by displaying menu.
-				switch (choicemenu2) {
-				case 1:
-					System.out.println("Enter the new Brand:");
-					String brand = kb.next();
-
-					break;
-				case 2:
-					System.out.println("Enter the new Model:");
-					String model = kb.next();
-
-					break;
-				case 3:
-					System.out.println("Enter the new SN");
-					long serialNumber = kb.nextLong();
-
-					break;
-				case 4:
-					System.out.println("Enter the new Price:");
-					double price = kb.nextDouble();
-
-					break;
-				case 5:
-					System.out.println("Quit:");
-					break;
-				}
-
 				break;
 
 			case 3:
-				System.out.println("You choose 3. Display all computers by a specific brand");
+				if (findComputersBy(brand)) {
+					System.out.println("3. Display all computers by a specific brand");
+					String brand = kb.next();
+					
 
-				// When option 3 is entered, prompt the user to enter a brand name.
-				// You then need to display the information of all computers that have that
-				// brand. (Hint: You may use a static method,
-				// for instance called findComputersBy , which accepts a string for a brand name
-				// then performs the needed search).
+				}
 
 				break;
 			case 4:
-				System.out.println("You choose 4. Display all computers by a specific price");
+				System.out.println("4. Display all computers by a specific price");
 
 				break;
 			case 5:
-				System.out.println("You choose 5 -> exit. The program finish");
+				System.out.println(" 5 -> exit. The program finish");
 				break;
 			}
-		}
-		// while menu was different 5 continue ask
-		while (choiceMenu != 5);
+		} while (choiceMenu != 5);
 	}
 
-	// check if the password is correct
 	// I really needed to review and remember that scanner has a object type and
 	// that by putting it here my kb.next() no longer showed an error
 	public static boolean checkPassword(Scanner kb) {
@@ -314,5 +314,30 @@ public class Computer {
 			}
 		}
 		return false;
+	}
+
+	// method for find all computers with a specific brand
+	public static void findComputersBy(String brand) {
+		
+		//declare array
+		//populate array with all computers
+		Computer inventory [] = new Computer [String brand] ;
+		
+		//count the number of computers with specific brand
+		int count = 0;
+		
+		// make a array with all brands = all the computers in the inventory with index
+		 for (int i = 0; i < inventory.length; i++) {
+			 
+			 System.out.println(c.getBrand());
+			 count++;
+			
+			 
+		 }
+
+	}
+
+	public static void findCheaperThan(double price) {
+		//question 4
 	}
 }
