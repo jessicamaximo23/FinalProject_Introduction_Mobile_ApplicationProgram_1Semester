@@ -3,7 +3,7 @@ package Project;
 import java.util.Scanner;
 
 public class Computer {
-	private static final int String = 0;
+
 	// -------------------------------------------------------------------------------------------------------------
 	// Project Final
 	// Written by: Jessica Maximo de Souza ID: 2391133
@@ -105,7 +105,6 @@ public class Computer {
 			return false;
 		}
 	}
-
 	// --------------------------------------------------
 	// Here are the part B of the program java
 	// We need tracking computers
@@ -190,11 +189,16 @@ public class Computer {
 					System.out.println("Computer serial number is: ");
 					long serialNumber = kb.nextLong();
 
-					System.out.println("Computer(s) added sucessfully");
-
-					// nao mostrar toda vez o main menu aqui
-					inventory[i] = new Computer(brand, model, price);
+					// a new method with this new computers
+					Computer c = new Computer(brand, model, price);
 					// como colocar o serial number
+					// each computer adde will enter the inventory
+					inventory[i] = c;
+
+					// count the computers
+					computerCounter++;
+
+					System.out.println("Computer(s) added sucessfully");
 
 				}
 				break;
@@ -214,7 +218,8 @@ public class Computer {
 
 					// The computer number is the index in the array inventory.
 					if (index < inventory.length && inventory[index] != null) {
-						Computer c = inventory[index];
+
+						Computer c = inventory[updateComputersNumber];
 
 						System.out.println("Computer #: " + updateComputersNumber);
 						System.out.println("Brand: " + c.getBrand());
@@ -268,23 +273,40 @@ public class Computer {
 						}
 
 						while (choicemenu2 != 5);
-						// ARRUMAR AQUI TA DANDO NULL NO GET
 					}
 				}
 				break;
 
 			case 3:
-				if (findComputersBy(brand)) {
-					System.out.println("3. Display all computers by a specific brand");
-					String brand = kb.next();
-					
+				System.out.println("3. Enter a specific brand");
+				String newBrand = kb.next();
 
+				// Reference for this inventory -> Computer inventory[] = new
+				// Computer[maxComputers];
+				findComputersBy(newBrand);
+
+				// scroll through the information about Computer c
+				for (Computer c : inventory) {
+					// c is not int so because of that the 0 didn't work. The correct -> null
+					if (c.getBrand().equals(newBrand)) {
+
+						// print all the informations in computer
+						System.out.println(c);
+					}
 				}
-
 				break;
 			case 4:
-				System.out.println("4. Display all computers by a specific price");
+				System.out.println("4. Enter a specific price: ");
+				Double price = kb.nextDouble();
 
+				findCheaperThan(price);
+				//
+
+				for (Computer c : inventory) {
+					if (c.getPrice() < price) {
+						System.out.println("The price is: " + c);
+					}
+				}
 				break;
 			case 5:
 				System.out.println(" 5 -> exit. The program finish");
@@ -317,27 +339,31 @@ public class Computer {
 	}
 
 	// method for find all computers with a specific brand
+	// Computer inside the class Computer
 	public static void findComputersBy(String brand) {
+		// create a list of object that contains all the computers
 		
-		//declare array
-		//populate array with all computers
-		Computer inventory [] = new Computer [String brand] ;
-		
-		//count the number of computers with specific brand
-		int count = 0;
-		
-		// make a array with all brands = all the computers in the inventory with index
-		 for (int i = 0; i < inventory.length; i++) {
-			 
-			 System.out.println(c.getBrand());
-			 count++;
-			
-			 
-		 }
-
+		Computer inventory[] = new Computer (brand);
+		// scroll through the information about Computer c
+		for (Computer c : inventory) {
+			if (c.getBrand().equals(brand)) {
+				// print all the informations in computer
+				System.out.println(c);
+			}
+		}
 	}
 
 	public static void findCheaperThan(double price) {
-		//question 4
+		// create a list of object that contains all the computers
+		
+		Computer inventory = new Computer (price);
+		
+		for (Computer c : inventory) {
+			if (c.getPrice() < price) {
+				System.out.println();
+			}
+		}
+
 	}
+
 }
