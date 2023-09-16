@@ -138,6 +138,7 @@ public class Computer {
 		// Tracking the object computer - previously created
 		Computer inventory[] = new Computer[maxComputers];
 
+
 		// Put do and while for continue show the main menu
 		do {
 			// Display a main menu
@@ -177,22 +178,22 @@ public class Computer {
 
 					// i+1 because need show "computer 1" instead "computer 0"
 					System.out.println("Computer #: " + (i + 1));
-					System.out.println("Computer brand is: ");
+					System.out.println("Brand : ");
 					String brand = kb.next();
 
-					System.out.println("Computer price is: ");
+					System.out.println("Price : ");
 					double price = kb.nextDouble();
 
-					System.out.println("Computer model is: ");
+					System.out.println("Model : ");
 					String model = kb.next();
 
-					System.out.println("Computer serial number is: ");
+					System.out.println("Serial number : ");
 					long serialNumber = kb.nextLong();
 
 					// a new method with this new computers
 					Computer c = new Computer(brand, model, price);
-					// como colocar o serial number
-					// each computer adde will enter the inventory
+
+					// each computer add will enter the inventory
 					inventory[i] = c;
 
 					// count the computers
@@ -217,7 +218,7 @@ public class Computer {
 					int index = updateComputersNumber - 1;
 
 					// The computer number is the index in the array inventory.
-					if (index < inventory.length && inventory[index] != null) {
+					if (index < inventory.length) {
 
 						Computer c = inventory[updateComputersNumber];
 
@@ -280,34 +281,24 @@ public class Computer {
 			case 3:
 				System.out.println("3. Enter a specific brand");
 				String newBrand = kb.next();
+				
+				Computer c1 = new Computer("apple", "Mac pro", 3050);
+				Computer c2 = new Computer("samsung", "pro", 600);
+				Computer c3 = new Computer("apple", "pro", 3000);
+				Computer c4 = new Computer("asus", "x", 1450);
 
-				// Reference for this inventory -> Computer inventory[] = new
-				// Computer[maxComputers];
-				findComputersBy(newBrand);
-
-				// scroll through the information about Computer c
-				for (Computer c : inventory) {
-					// c is not int so because of that the 0 didn't work. The correct -> null
-					if (c.getBrand().equals(newBrand)) {
-
-						// print all the informations in computer
-						System.out.println(c);
-					}
-				}
+				findComputersBy(newBrand, inventory);
+				
 				break;
+				
 			case 4:
 				System.out.println("4. Enter a specific price: ");
 				Double price = kb.nextDouble();
 
-				findCheaperThan(price);
-				//
-
-				for (Computer c : inventory) {
-					if (c.getPrice() < price) {
-						System.out.println("The price is: " + c);
-					}
-				}
+				findCheaperThan(price, inventory);
+				
 				break;
+				
 			case 5:
 				System.out.println(" 5 -> exit. The program finish");
 				break;
@@ -315,13 +306,10 @@ public class Computer {
 		} while (choiceMenu != 5);
 	}
 
-	// I really needed to review and remember that scanner has a object type and
-	// that by putting it here my kb.next() no longer showed an error
 	public static boolean checkPassword(Scanner kb) {
 		// user has only 3 tries
 		int passwordTries = 0;
 
-		// I needed to remember the syntax equals, before that I tried only use "=="
 		// while the name password for different that "password" continue to prompt
 		while (passwordTries < 3) {
 			String namePassword = kb.next();
@@ -329,7 +317,6 @@ public class Computer {
 
 			if (namePassword.equals("password")) {
 				return true;
-
 			} else {
 				// After the 3rd illegal entry, the main menu in figure 1 is re-displayed again.
 				System.out.println("Invalid, try again");
@@ -340,27 +327,32 @@ public class Computer {
 
 	// method for find all computers with a specific brand
 	// Computer inside the class Computer
-	public static void findComputersBy(String brand) {
-		// create a list of object that contains all the computers
-		
-		Computer inventory[] = new Computer (brand);
+	public static void findComputersBy(String brand, Computer[] inventory) {
+
 		// scroll through the information about Computer c
 		for (Computer c : inventory) {
-			if (c.getBrand().equals(brand)) {
+			if (c.getBrand().equalsIgnoreCase(brand)) {
 				// print all the informations in computer
+				System.out.println("All the computers with this brand: " );
 				System.out.println(c);
+				System.out.println();
 			}
 		}
 	}
 
-	public static void findCheaperThan(double price) {
-		// create a list of object that contains all the computers
-		
-		Computer inventory = new Computer (price);
-		
+	public static void findCheaperThan(double price, Computer[] inventory) {
+
+		// scroll through the information about Computer c
 		for (Computer c : inventory) {
+			// print the values less than price that user put
 			if (c.getPrice() < price) {
+
+				System.out.println("All the computers with this prices or less: ");
+				System.out.println(c);
 				System.out.println();
+
+			} else {
+				System.out.println("Not found any computer with this PRICE or less.Try again");
 			}
 		}
 

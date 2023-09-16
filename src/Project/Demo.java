@@ -13,9 +13,6 @@ public class Demo {
 		//System.out.println(c1.equal(c2));
 		
 
-		Computer c3 = new Computer("samsung", "Mac pro", 300);
-
-		Computer c4 = new Computer("samsung", " pro", 600);
 		
 
 	}
