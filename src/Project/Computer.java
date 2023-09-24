@@ -18,7 +18,7 @@ public class Computer {
 	private String brand;
 	private String model;
 	private Double price;
-	private long serialNumber;
+	private long serialNumber = 0;
 	private static int serialNumberCounter;
 	private static int computerCounter;
 
@@ -84,21 +84,12 @@ public class Computer {
 		System.out.println("The computer serial number is : " + c.getSerialNumber());
 		System.out.println("-----------------------------");
 
-		// pro C nao ser nulo
-		// instancia o objeto computer
-		// c = new Computer();
-
-		// chama o metodo getModel, get price e get brand
-		// String brand = c.getBrand();
-		// String model = c.getModel();
-		// Double price = c.getPrice();
-		// long serialNumber = c.getSerialNumber();
-
 	}
 
 	@Override
 	public String toString() {
-		return "Computer Brand: " + brand + " || model: " + model + " ||" + " Price: " + price + " ||" + "Serial Number: " + (serialNumber + 1) + "|| ";
+		return "Computer Brand: " + brand + " || model: " + model + " ||" + " Price: " + price + " ||"
+				+ "Serial Number: " + serialNumber + "|| ";
 	}
 
 	// for know how many computers are created
