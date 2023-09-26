@@ -18,8 +18,8 @@ public class Computer {
 	private String brand;
 	private String model;
 	private Double price;
-	private long serialNumber = 0;
-	private static int serialNumberCounter;
+	private long serialNumber;
+	private static int serialNumberCounter = 1;
 	private static int computerCounter;
 
 	// Create a computer object
@@ -88,8 +88,8 @@ public class Computer {
 
 	@Override
 	public String toString() {
-		return "Computer Brand: " + brand + " || model: " + model + " ||" + " Price: " + price + " ||"
-				+ "Serial Number: " + serialNumber + "|| ";
+		return "Computer # " + serialNumber + " Brand: " + brand + " || model: " + model + " ||" + " Price: " + price
+				+ " ||" + "Serial Number: " + serialNumber + "|| ";
 	}
 
 	// for know how many computers are created
@@ -104,7 +104,6 @@ public class Computer {
 		if (c == null) {
 			return false;
 		}
-
 		if (brand == c.getBrand() && model == c.getModel() && price == c.getPrice()) {
 			return true;
 

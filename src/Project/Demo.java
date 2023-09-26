@@ -22,7 +22,8 @@ public class Demo {
 		System.out.println("Welcome to this program, here we can tracking the computer that you want ");
 		System.out.println("-------------------------------------------------------------------------");
 		Scanner kb = new Scanner(System.in);
-
+		
+		//Initialize the variables
 		int maxComputers = 0;
 		// initialize the variable main menu
 		int choiceMenu;
@@ -32,8 +33,7 @@ public class Demo {
 		int updateComputersNumber = 0;
 		// initialize serial number
 		long serialNumber = 0;
-		int computerCounter = 0;
-
+		
 		do {
 			// owner put the number maximum of computers (Size or maxComputers)
 			System.out.println("Whats the maximum numbers of computers that your store can contain? ");
@@ -64,7 +64,6 @@ public class Demo {
 			System.out.println("---------------------------------------------------------------------------------");
 			System.out.println("Please enter your choice > ");
 
-			// initialized a variably menu
 			// user choose a option between 1 and 5
 			choiceMenu = kb.nextInt();
 
@@ -101,7 +100,7 @@ public class Demo {
 				for (int i = 0; i < addNewComputers; i++) {
 
 					// i+1 because need show "computer 1" instead "computer 0"
-					System.out.println("Computer #: " + (i + 1));
+					System.out.println("Computer #:" + (i + 1));
 					System.out.println("Brand : ");
 					String brand = kb.next();
 
@@ -120,7 +119,6 @@ public class Demo {
 					System.out.println("Model : ");
 					String model = kb.next();
 
-					// Initialize the serialNumber
 					// i = each new computer
 					serialNumber = i + 1;
 
@@ -155,10 +153,10 @@ public class Demo {
 
 						Computer c = inventory[index];
 
-						System.out.println("Computer #: " + computerCounter);
+						System.out.println("Computer #: " + updateComputersNumber);
 						System.out.println("Model: " + c.getModel());
 						System.out.println("Brand: " + c.getBrand());
-						System.out.println("Computer SerialNumber: " + serialNumber);
+						System.out.println("Computer SerialNumber: " + c.getSerialNumber());
 						System.out.println("Price: $ " + c.getPrice());
 
 						System.out.println();
@@ -177,7 +175,7 @@ public class Demo {
 							// what information would you like to change?
 							choicemenu2 = kb.nextInt();
 
-							// if the user put ne number worng in the MENU 2
+							// if the user put the number wrong in the MENU 2
 							if (choicemenu2 > 5 || choicemenu2 <= 0) {
 								System.out.println("This number is invalid.Try again");
 								System.out.println();
@@ -199,8 +197,7 @@ public class Demo {
 								System.out.println("3.Enter the new SN");
 								serialNumber = kb.nextLong();
 								c.setSerialNumber(serialNumber);
-								serialNumber++;
-
+								
 								break;
 							case 4:
 								// initialize the price
@@ -279,12 +276,13 @@ public class Demo {
 		}
 		return false;
 	}
+
 	// method for find all computers with a specific brand
 	// Computer inside the class Computer
 	public static void findComputersBy(String brand, Computer[] inventory) {
 
 		int computerCounter = 0;
-		long serialNumber = 0;
+		
 		// scroll through the information about Computer c
 		for (Computer c : inventory) {
 
@@ -315,7 +313,7 @@ public class Demo {
 			if (c != null && c.getPrice() != null && c.getPrice() <= price) {
 
 				computerCounter++;
-				
+
 				System.out.println("All the computers with this prices or less: ");
 				System.out.println(c);
 				System.out.println();
