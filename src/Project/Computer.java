@@ -88,7 +88,7 @@ public class Computer {
 
 	@Override
 	public String toString() {
-		return "Computer # " + serialNumber + " Brand: " + brand + " || model: " + model + " ||" + " Price: " + price
+		return "Computer #" + " Brand: " + brand + " || model: " + model + " ||" + " Price: " + price
 				+ " ||" + "Serial Number: " + serialNumber + "|| ";
 	}
 
