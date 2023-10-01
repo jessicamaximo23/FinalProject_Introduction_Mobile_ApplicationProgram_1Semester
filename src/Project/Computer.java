@@ -36,8 +36,7 @@ public class Computer {
 
 	public Computer() {
 		serialNumber = serialNumberCounter;
-		serialNumberCounter++;
-		computerCounter++;
+				
 	}
 
 	// Make getter and setter for Brand, model price and Serial Number

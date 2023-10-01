@@ -32,8 +32,7 @@ public class Demo {
 		// initialize update computers
 		int updateComputersNumber = 0;
 		// initialize serial number
-		long serialNumber = 0;
-		 int computerCounter = 0;
+		long serialNumberCounter = 0;
 
 		do {
 			// owner put the number maximum of computers (Size or maxComputers)
@@ -51,7 +50,9 @@ public class Demo {
 		// Create a empty array (inventory)
 		// Tracking the object computer - previously created
 		Computer inventory[] = new Computer[maxComputers];
-
+		// count
+		int computerCounter = 0;
+		long serialNumber = 0;
 		// Put do and while for continue show the main menu
 		do {
 			// Display a main menu
@@ -73,9 +74,9 @@ public class Demo {
 				System.out.println("This number is invalid.Try again");
 				System.out.println();
 			}
-
 			// Each main menu
 			switch (choiceMenu) {
+
 			case 1:
 				System.out.println("1.Put your password: ");
 				// if the correct password is check put how many computers do want to add
@@ -85,55 +86,67 @@ public class Demo {
 					do {
 						System.out.println("How many computers do want to add?");
 						addNewComputers = kb.nextInt();
-						 computerCounter++;
 
-						if (addNewComputers > maxComputers || addNewComputers <= 0) {
+						// number cant be negative or more the inventory.length
+						if (addNewComputers > inventory.length - computerCounter || addNewComputers <= 0) {
 							System.out.println(
 									"Please choose other number. This number exceeds tha maximum capacity or is less than 0");
 						}
 					}
+					// while for continue to How many computers do want to add?
+					// continue asking
+					while (addNewComputers > inventory.length - computerCounter || addNewComputers <= 0);
+
 					// check if has enough space in the computer store
 					// if the new computers are more than capacity inventory
-					while (addNewComputers > maxComputers);
-					System.out.println();
-				}
-				// add new computers to the inventory
-				// put the quantity of the computers
-				for (int i = 0; i < addNewComputers; i++) {
+					if (computerCounter + addNewComputers <= inventory.length
+							&& serialNumberCounter + addNewComputers <= inventory.length) {
 
-					// +i because need show "computer 1" instead "computer 0"
-					System.out.println("Computer #:" +  (computerCounter + i));
-					System.out.println("Brand : ");
-					String brand = kb.next();
+						// add new computers to the inventory
+						// put the quantity of the computers
+						for (int i = 0; i < addNewComputers; i++) {
 
-					// initialize the price
-					double price = 0;
-					do {
-						System.out.println("Price : ");
-						price = kb.nextDouble();
+							Computer c = new Computer();
+							// +i because need show "computer 1" instead "computer 0"
+							computerCounter++;
+							serialNumberCounter++;
 
-						// testing for price be only positive numbers
-						if (price <= 0) {
-							System.out.println("Invalid price.Should be a positive value");
+							System.out.println("Computer #:" + computerCounter);
+
+							System.out.print("Brand: ");
+							String brand = kb.next();
+							c.setBrand(brand);
+
+							// initialize the price
+							double price = 0;
+							do {
+								System.out.print("Price: ");
+								price = kb.nextDouble();
+								c.setPrice(price);
+
+								// testing for price be only positive numbers
+								if (price <= 0) {
+									System.out.println("Invalid price.Should be a positive value");
+								}
+							} while (price <= 0);
+
+							System.out.print("Model: ");
+							String model = kb.next();
+							c.setModel(model);
+
+							
+							System.out.print("Serial number: " + serialNumberCounter);
+							System.out.println();
+
+							// A new method with this new computers
+							c = new Computer(brand, model, price);
+
+							// Each computer add will enter the inventory
+							inventory[computerCounter - 1] = c;
+							System.out.println("Computer(s) added sucessfully");
+							System.out.println();
 						}
-					} while (price <= 0);
-
-					System.out.println("Model : ");
-					String model = kb.next();
-
-					// i = each new computer
-					serialNumber = i + 1;
-
-					System.out.println("Serial number : " + serialNumber);
-					System.out.println();
-
-					// A new method with this new computers
-					Computer c = new Computer(brand, model, price);
-
-					// Each computer add will enter the inventory
-					inventory[i] = c;
-					System.out.println("Computer(s) added sucessfully");
-
+					} 
 				}
 				break;
 
@@ -142,21 +155,29 @@ public class Demo {
 
 				// if the correct password is check put how many computers do want to update
 				if (checkPassword(kb)) {
-					System.out.println("Which computer number do you want update?");
 
-					// variable for update the computers
-					updateComputersNumber = kb.nextInt();
+					do {
+						System.out.println("Which computer number do you want update?");
+						// variable for update the computers
+						updateComputersNumber = kb.nextInt();
 
-					// for update the computer we need to find the index, because computer already
-					// exist
-					int index = updateComputersNumber - 1;
+						// check if the update number is positive and in the inventory
+						// not should more than inventory = maxComputers
+						if (updateComputersNumber > computerCounter || updateComputersNumber <= 0) {
+							System.out.println("Try Again.You dont have this number in inventory");
+							System.out.println();
+						}
+					} while (updateComputersNumber > computerCounter || updateComputersNumber <= 0);
 
+					// for update the computer we need to find the index, computer already exist
 					// The computer number is the index in the array inventory.
-					if (index < addNewComputers) {
+					if (updateComputersNumber > 0 || updateComputersNumber < computerCounter) {
+						int index = updateComputersNumber - 1;
 
 						Computer c = inventory[index];
-
-						System.out.println("Computer #: " + updateComputersNumber);
+						// Each computer add will enter the inventory
+						serialNumberCounter++;
+						System.out.println("Computer #: ");
 						System.out.println("Model: " + c.getModel());
 						System.out.println("Brand: " + c.getBrand());
 						System.out.println("Computer SerialNumber: " + c.getSerialNumber());
@@ -184,31 +205,40 @@ public class Demo {
 							switch (choicemenu2) {
 
 							case 1:
-								System.out.println("1. Enter the new Brand:");
+								System.out.print("1. Enter the new Brand:");
 								String brand = kb.next();
 								c.setBrand(brand);
 								break;
 							case 2:
-								System.out.println("2. Enter the new Model:");
+								System.out.print("2. Enter the new Model:");
 								String model = kb.next();
 								c.setModel(model);
 								break;
 							case 3:
-								System.out.println("3.Enter the new SN");
-								serialNumber = kb.nextLong();
-								c.setSerialNumber(serialNumber);
+								// Initialize the serial number
+								long newSerialNumber = 0;
+								do {
+									System.out.print("3.Enter the new SN");
+									newSerialNumber = kb.nextLong();
+									c.setSerialNumber(newSerialNumber);
+
+									if (newSerialNumber <= 0) {
+										System.out.print("Invalid SerialNumber");
+									}
+								} while (newSerialNumber <= 0);
+
 								break;
 							case 4:
 								// initialize the price
 								double price = 0;
 								do {
-									System.out.println("4. Enter the new Price: ");
+									System.out.print("4. Enter the new Price: ");
 									price = kb.nextDouble();
 									c.setPrice(price);
 
 									// not accepted negative numbers in the UPDATE
 									if (price <= 0) {
-										System.out.println("Invalid price.Should be a positive value");
+										System.out.print("Invalid price.Should be a positive value");
 									}
 								} while (price <= 0);
 
@@ -219,20 +249,29 @@ public class Demo {
 								break;
 
 							}
-							System.out.println("Computer(s) changed sucessfully");
+							// System.out.println("Computer(s) changed successfully");
 							System.out.println();
 
 						} while (choicemenu2 != 5);
-					} else {
-						System.out.println("Try Again.You dont have this number in inventory");
-						System.out.println();
 					}
 				}
 				break;
 
 			case 3:
+
+				String newBrand = "";
+				// Computer[] c = inventory;
+
+				// do {
 				System.out.println("3. Enter a specific brand");
-				String newBrand = kb.next();
+				newBrand = kb.next();
+
+				// if(newBrand != c.getBrand().equalsIgnoreCase(brand) {
+				// System.out.println("Not found. Try Again");
+				// }
+
+				// } while (newBrand != c.getBrand().equalsIgnoreCase(brand);
+
 				findComputersBy(newBrand, inventory);
 				break;
 
@@ -255,6 +294,7 @@ public class Demo {
 			}
 		} while (choiceMenu != 5);
 	}
+
 	public static boolean checkPassword(Scanner kb) {
 		// user has only 3 tries
 		int passwordTries = 0;
@@ -278,45 +318,47 @@ public class Demo {
 	// Computer inside the class Computer
 	public static void findComputersBy(String brand, Computer[] inventory) {
 		int computerCounter = 0;
-
+		long serialNumberCounter = 0;
 		// scroll through the information about Computer c
 		for (Computer c : inventory) {
 
 			// for app not crash I need to put != null for c and for brand
 			if (c != null && c.getBrand() != null && c.getBrand().equalsIgnoreCase(brand)) {
-
 				computerCounter++;
+				serialNumberCounter++;
 				// print all the informations in computer
 				System.out.println("All the computers with this brand: ");
 				System.out.println(c);
 				System.out.println();
 			}
 		}
-		//if not found any computer with this brand show a message
+		// if not found any computer with this brand show a message
 		if (computerCounter == 0) {
 			System.out.println("Try Again.Not found this BRAND in inventory");
 			System.out.println();
 		}
 	}
+
 	public static void findCheaperThan(double price, Computer[] inventory) {
 		int computerCounter = 0;
-		
+		long serialNumberCounter = 0;
+
 		// scroll through the information about Computer c
 		for (Computer c : inventory) {
 			// print the values less than price that user put
 			if (c != null && c.getPrice() != null && c.getPrice() <= price) {
-				
 				computerCounter++;
+				serialNumberCounter++;
+
 				System.out.println("All the computers with this prices or less: ");
 				System.out.println(c);
 				System.out.println();
 			}
 		}
-		//if not found any computer with this price show a message
+		// if not found any computer with this price show a message
 		if (computerCounter == 0) {
 			System.out.println("Try Again.Not found this PRICE in inventory");
 			System.out.println();
 		}
-
 	}
 }
