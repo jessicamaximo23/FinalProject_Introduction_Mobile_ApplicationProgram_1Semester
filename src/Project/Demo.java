@@ -87,14 +87,13 @@ public class Demo {
 						System.out.println("How many computers do want to add?");
 						addNewComputers = kb.nextInt();
 
-						// number cant be negative or more the inventory.length
+						// number can't be negative or more the inventory.length
 						if (addNewComputers > inventory.length - computerCounter || addNewComputers <= 0) {
 							System.out.println(
 									"Please choose other number. This number exceeds tha maximum capacity or is less than 0");
 						}
 					}
 					// while for continue to How many computers do want to add?
-					// continue asking
 					while (addNewComputers > inventory.length - computerCounter || addNewComputers <= 0);
 
 					// check if has enough space in the computer store
@@ -134,7 +133,6 @@ public class Demo {
 							String model = kb.next();
 							c.setModel(model);
 
-							
 							System.out.print("Serial number: " + serialNumberCounter);
 							System.out.println();
 
@@ -146,7 +144,7 @@ public class Demo {
 							System.out.println("Computer(s) added sucessfully");
 							System.out.println();
 						}
-					} 
+					}
 				}
 				break;
 
@@ -338,7 +336,6 @@ public class Demo {
 			System.out.println();
 		}
 	}
-
 	public static void findCheaperThan(double price, Computer[] inventory) {
 		int computerCounter = 0;
 		long serialNumberCounter = 0;
