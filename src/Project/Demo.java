@@ -15,7 +15,9 @@ public class Demo {
 
 		// --------------------------------------------------
 		// Here are the part B of the program java
-		// We need tracking computers
+		// We need tracking computers, add new computers or make updates.
+		// References: Java, Java, Java Object-Oriented Problem Solving Third Edition R. Morelli and R. Walde
+		// Trinity College Hartford, CT June 25, 2017 
 		// --------------------------------------------------
 
 		// Display a Welcome message
