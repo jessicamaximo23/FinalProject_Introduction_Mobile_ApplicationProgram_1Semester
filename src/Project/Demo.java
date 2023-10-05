@@ -106,7 +106,6 @@ public class Demo {
 						for (int i = 0; i < addNewComputers; i++) {
 
 							Computer c = new Computer();
-							// +i because need show "computer 1" instead "computer 0"
 							computerCounter++;
 							serialNumberCounter++;
 
@@ -257,18 +256,9 @@ public class Demo {
 
 			case 3:
 
-				String newBrand = "";
-				// Computer[] c = inventory;
-
-				// do {
+				String newBrand = "";				
 				System.out.println("3. Enter a specific brand");
 				newBrand = kb.next();
-
-				// if(newBrand != c.getBrand().equalsIgnoreCase(brand) {
-				// System.out.println("Not found. Try Again");
-				// }
-
-				// } while (newBrand != c.getBrand().equalsIgnoreCase(brand);
 
 				findComputersBy(newBrand, inventory);
 				break;

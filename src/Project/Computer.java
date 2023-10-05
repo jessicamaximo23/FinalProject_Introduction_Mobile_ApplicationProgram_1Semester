@@ -35,35 +35,27 @@ public class Computer {
 	}
 
 	public Computer() {
-		serialNumber = serialNumberCounter;
-				
+		serialNumber = serialNumberCounter;				
 	}
-
 	// Make getter and setter for Brand, model price and Serial Number
 	public String getBrand() {
 		return brand;
 	}
-
 	public void setBrand(String br) {
 		brand = br;
 	}
-
 	public String getModel() {
 		return model;
 	}
-
 	public void setModel(String m) {
 		model = m;
 	}
-
 	public Double getPrice() {
 		return price;
 	}
-
 	public void setPrice(Double pr) {
 		price = pr;
 	}
-
 	public long getSerialNumber() {
 		return serialNumber;
 	}
@@ -71,7 +63,6 @@ public class Computer {
 	public void setSerialNumber(long sn) {
 		serialNumber = sn;
 	}
-
 	// print the information of an object
 	// make get for brand, price, model and Serial number
 	public static void displayComputer(Computer c) {
